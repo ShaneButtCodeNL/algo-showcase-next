@@ -51,8 +51,9 @@ main {
 
 .sidebar-content {
   grid-area: sb;
-  margin: 0 1rem 0;
-  overflow: hidden;
+  margin: .5rem 1rem 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .sidebar-slider {
@@ -64,4 +65,13 @@ main {
 
 .main-content {
   grid-area: bod;
+}
+
+.green-border{
+  border: green solid 2px;
+}
+.horizontal-list{
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 }
