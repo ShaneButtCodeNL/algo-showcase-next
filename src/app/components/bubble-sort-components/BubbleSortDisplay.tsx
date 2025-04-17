@@ -2,21 +2,24 @@
 
 import bubbleSortAlgo from "@/app/algorithm-code/bubbleSortAlgo";
 import { times } from "@/constants";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 export default function BubbleSortDisplay(props: any) {
-  const [list, setList] = useState([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+  let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+  const animationFrames = bubbleSortAlgo(sampleList);
+
+  const [list, setList] = useState(animationFrames[0].list);
   const [p1, setP1] = useState(-1);
   const [p2, setP2] = useState(-1);
   const [compares, setCompares] = useState(0);
   const [swaps, setSwaps] = useState(0);
   const [sorted, setSorted] = useState(0);
   const [step, setStep] = useState(0);
-  const [animation, setAnimation] = useState(null);
+  const [animation, setAnimation]: [null | NodeJS.Timeout, any] =
+    useState(null);
   const speed = 0;
   const speeds = times;
 
-  const animationFrames = bubbleSortAlgo(list);
   console.log(animationFrames);
   return (
     <div>
@@ -24,11 +27,11 @@ export default function BubbleSortDisplay(props: any) {
       <div id="bs-list" className="horizontal-list">
         {list.map((v, i) => (
           <div
-            key={`${"list-item-" + i}`}
-            id={`${"list-item-" + i}`}
+            key={`${"list-item-" + v[1]}`}
+            id={`${"list-item-" + v[1]}`}
             className={i === p1 || i === p2 ? "green-border" : ""}
           >
-            {v}
+            {v[0]}
           </div>
         ))}
       </div>
@@ -53,7 +56,7 @@ export default function BubbleSortDisplay(props: any) {
                   }
                   return v;
                 });
-              }, 2 * speeds[speed]);
+              }, 1000);
               setAnimation(interval);
             }
           }}
