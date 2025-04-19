@@ -63,6 +63,20 @@ main {
   background-color: var(--background-fade);
 }
 
+.directory{
+  margin-left: 1rem;
+}
+.directory li{
+  position: relative;
+}
+.directory li::before{
+  position: absolute;
+  content: '\2937';
+  font-size: 75%;
+  left: -1.5ch;
+  top:.2ch  
+}
+
 .main-content {
   grid-area: bod;
 }
