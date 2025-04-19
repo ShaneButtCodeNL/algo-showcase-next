@@ -4,6 +4,8 @@
   --background: #ffffff;
   --background-fade: #0000001e;
   --foreground: #171717;
+  interpolate-size: allow-keywords;
+
 }
 
 @theme inline {
@@ -61,6 +63,33 @@ main {
   grid-area: sb-btn;
   border-right: solid white;
   background-color: var(--background-fade);
+}
+
+/*
+Collapsable card
+*/
+.collapsable-card{
+  --card-time:2s;
+  width: fit-content; 
+  min-width: 15rem; 
+  margin-right: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+.collapsable-card-title{
+  display: flex;
+  justify-content: space-between;
+}
+.card-body{
+  transition: max-height var(--card-time) ease,visibilty var(--card-time);
+  height: auto;
+  visibility: true;
+  transition: height var(--card-time) ease;
+}
+.hide-card{
+  height: 0rem;
+  visibility: false;
+  pointer-events: none;
 }
 
 .directory{
