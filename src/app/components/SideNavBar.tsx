@@ -1,15 +1,18 @@
 "use client";
+
+import Link from "next/link";
+import Directory from "./Directory";
+
 export default function SideNavBar(props: any) {
   const openString = "<";
   const closeString = ">";
-  const hiddenSBStyle = { margin: 0, transition: "margin 0s 280ms" };
   return (
     <>
-      <div
-        className="sidebar-content"
-        style={props.showSB ? {} : hiddenSBStyle}
-      >
-        content
+      <div className="sidebar-content" inert={props.showSB === false}>
+        <div style={{ borderBottom: "solid 1px" }}>
+          <Link href="/">Home</Link>
+        </div>
+        <Directory />
       </div>
       <button
         className="sidebar-slider"

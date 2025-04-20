@@ -37,29 +37,32 @@ main {
     "sb sb-btn tit"
     "sb sb-btn bod";
   grid-template-rows: 1fr 10fr;
-  grid-template-columns: 10rem 1rem 1fr;
+  grid-template-columns: 35ch 1rem 1fr;
   min-height: 100vh;
   transition: 300ms ease-out;
-}
-
-.hide-sidebar {
-  grid-template-columns: 0 1rem 1fr;
 }
 
 .title-bar {
   grid-area: tit;
   border-bottom: solid red;
+  padding:1rem 0 0 1rem;
+}
+
+/*
+Side bar
+*/
+.hide-sidebar {
+  grid-template-columns: 0 1rem 1fr;
 }
 
 .sidebar-content {
   grid-area: sb;
-  margin: .5rem 1rem 0;
+  margin: .5rem .5rem 0;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .sidebar-slider {
-  margin-right: 0.5rem;
   grid-area: sb-btn;
   border-right: solid white;
   background-color: var(--background-fade);
@@ -69,7 +72,7 @@ main {
 Collapsable card
 */
 .collapsable-card{
-  --card-time:2s;
+  --card-time:700ms;
   width: fit-content; 
   min-width: 15rem; 
   margin-right: 2rem;
@@ -79,26 +82,31 @@ Collapsable card
 .collapsable-card-title{
   display: flex;
   justify-content: space-between;
+  border-bottom: solid 1px;
 }
 .card-body{
   transition: max-height var(--card-time) ease,visibilty var(--card-time);
   height: auto;
   visibility: true;
-  transition: height var(--card-time) ease;
+  max-height: 15rem;
+  transition: var(--card-time) ease;
 }
 .hide-card{
-  height: 0rem;
+  max-height: 0rem;
   visibility: false;
   pointer-events: none;
 }
 
+/*
+Directory
+*/
 .directory{
   margin-left: 1rem;
 }
-.directory li{
+.directory-link{
   position: relative;
 }
-.directory li::before{
+.directory-link::before{
   position: absolute;
   content: '\2937';
   font-size: 75%;

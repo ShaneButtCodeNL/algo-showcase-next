@@ -26,10 +26,10 @@ export default function CollapsableCard(props: {
             setOpen((v) => !v);
           }}
         >
-          {open ? "\u27F1" : "\u27f0"}
+          {!open ? "\u27F1" : "\u27f0"}
         </button>
       </div>
-      <div className={`card-body ${open ? "" : "hide-card"}`} hidden={!open}>
+      <div className={`card-body ${open ? "" : "hide-card"}`} inert={!open}>
         {props.children}
       </div>
     </div>
