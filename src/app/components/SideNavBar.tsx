@@ -9,7 +9,10 @@ export default function SideNavBar(props: any) {
   return (
     <>
       <div className="sidebar-content" inert={props.showSB === false}>
-        <div style={{ borderBottom: "solid 1px" }}>
+        <div
+          style={{ borderBottom: "solid 1px", marginLeft: "1rem" }}
+          className="directory-link"
+        >
           <Link href="/">Home</Link>
         </div>
         <Directory />

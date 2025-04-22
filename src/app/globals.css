@@ -118,11 +118,25 @@ Directory
   grid-area: bod;
 }
 
-.green-border{
-  border: green solid 2px;
-}
+
 .horizontal-list{
   display: flex;
   flex-direction: row;
   gap: 1em;
+}
+
+/*
+Number Boxes
+*/
+.number-box{
+  --box-size:3rem;
+  outline: solid 1px;
+  width:var(--box-size);
+  height:var(--box-size);
+  display: grid;
+  place-content: center;
+}
+
+.green-border{
+  outline: green solid 3px;
 }

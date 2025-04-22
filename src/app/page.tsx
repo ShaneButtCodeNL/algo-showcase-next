@@ -1,5 +1,3 @@
-import Link from "next/link";
-import CollapsableCard from "./components/front-end/ColapsableCard";
 import Directory from "./components/Directory";
 
 export default function Home() {
