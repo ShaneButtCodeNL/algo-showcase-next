@@ -1,49 +1,88 @@
-export default function bubbleSortAlgo(list: Array<number>) {
+export default function bubbleSortAlgo(inputList: Array<number>) {
   let compares = 0;
   let swaps = 0;
-  let sorted = 0;
+  let sortCount = inputList.length;
+  let sorted = new Set([sortCount]);
   let res = [];
-  let orderedList = list.map((v, i) => [v, i]);
-  console.log("TEST\n" + orderedList);
-  for (let i = 1; i < orderedList.length; i++) {
+  let list = inputList.map((v) => v);
+  let orders = Array.from({ length: list.length }, (_, i) => i);
+  for (let i = 1; i < list.length; i++) {
     let p1 = 0;
     let p2 = 1;
     let hasSwapped = false;
-    res.push({ p1, p2, swaps, compares, sorted, list: [...orderedList] });
-    for (let j = 1; j < orderedList.length - sorted; j++) {
+    res.push({
+      p1,
+      p2,
+      swaps,
+      compares,
+      sorted: [...sorted],
+      list: [...list],
+      orders: [...orders],
+    });
+    for (let j = 1; j < sortCount; j++) {
       compares++;
-      res.push({ p1, p2, swaps, compares, sorted, list: [...orderedList] });
-      if (orderedList[p1][0] > orderedList[p2][0]) {
-        swaps++;
-        hasSwapped = true;
-        [orderedList[p1], orderedList[p2]] = [orderedList[p2], orderedList[p1]];
-      }
-      res.push({ p1, p2, swaps, compares, sorted, list: [...orderedList] });
-      p1++;
-      p2++;
-    }
-    if (!hasSwapped) {
       res.push({
         p1,
         p2,
         swaps,
         compares,
-        sorted: orderedList.length,
-        list: [...orderedList],
+        sorted: [...sorted],
+        list: [...list],
+        orders: [...orders],
+      });
+      if (list[p1] > list[p2]) {
+        swaps++;
+        hasSwapped = true;
+        [list[p1], list[p2]] = [list[p2], list[p1]];
+        [orders[p1], orders[p2]] = [orders[p2], orders[p1]];
+      }
+      res.push({
+        p1,
+        p2,
+        swaps,
+        compares,
+        sorted: [...sorted],
+        list: [...list],
+        orders: [...orders],
+      });
+      p1++;
+      p2++;
+    }
+    if (!hasSwapped) {
+      while (--sortCount >= 0) sorted.add(sortCount);
+      res.push({
+        p1,
+        p2,
+        swaps,
+        compares,
+        sorted: [...sorted],
+        list: [...list],
+        orders: [...orders],
       });
       return res;
     }
-    sorted++;
+    sortCount--;
+    sorted.add(sortCount);
     res.push({
       p1: p1 - 1,
       p2: p2 - 1,
       swaps,
       compares,
-      sorted,
-      list: [...orderedList],
+      sorted: [...sorted],
+      list: [...list],
+      orders: [...orders],
     });
   }
-  res.push({ p1: -1, p2: -1, swaps, compares, sorted, list: [...orderedList] });
+  sorted.add(0);
+  res.push({
+    p1: -1,
+    p2: -1,
+    swaps,
+    compares,
+    sorted: [...sorted],
+    list: [...list],
+    orders: [...orders],
+  });
 
   return res;
 }

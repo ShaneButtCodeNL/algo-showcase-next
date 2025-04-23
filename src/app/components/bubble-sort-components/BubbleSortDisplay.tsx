@@ -9,12 +9,13 @@ export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
   const animationFrames = bubbleSortAlgo(sampleList);
 
+  const [orders, setOrders] = useState(animationFrames[0].orders);
   const [list, setList] = useState(animationFrames[0].list);
   const [p1, setP1] = useState(-1);
   const [p2, setP2] = useState(-1);
   const [compares, setCompares] = useState(0);
   const [swaps, setSwaps] = useState(0);
-  const [sorted, setSorted] = useState(0);
+  const [sorted, setSorted] = useState(animationFrames[0].sorted);
   const [step, setStep] = useState(0);
   const [animation, setAnimation]: [null | NodeJS.Timeout, any] =
     useState(null);
@@ -27,9 +28,10 @@ export default function BubbleSortDisplay(props: any) {
       <div>bubbleSort {step}</div>
       {
         <NumberList
-          list={list.map((v) => v[0])}
-          orders={list.map((v) => v[1])}
+          list={list.map((v) => v)}
+          orders={orders.map((v) => v)}
           compare={[p1, p2]}
+          markComplete={sorted}
         />
       }
       <div id="bs-sort-controls">
@@ -38,13 +40,12 @@ export default function BubbleSortDisplay(props: any) {
           onClick={() => {
             if (animation === null) {
               var interval = setInterval(() => {
-                const nextValue = step + 1;
-
                 setStep((v) => {
                   v += 1;
                   setP1(animationFrames[v].p1);
                   setP2(animationFrames[v].p2);
                   setList(animationFrames[v].list);
+                  setSorted(animationFrames[v].sorted);
                   setCompares(animationFrames[v].compares);
                   setSwaps(animationFrames[v].swaps);
                   if (v === animationFrames.length - 1) {
@@ -53,7 +54,7 @@ export default function BubbleSortDisplay(props: any) {
                   }
                   return v;
                 });
-              }, 1000);
+              }, 300);
               setAnimation(interval);
             }
           }}

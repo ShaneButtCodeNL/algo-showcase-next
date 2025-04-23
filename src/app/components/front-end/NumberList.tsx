@@ -1,21 +1,22 @@
-import { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import NumberBox from "./NumberBox";
 
 export default function NumberList(props: {
   list: Array<number>;
   orders: Array<number>;
   compare: Array<number>;
+  markComplete: Array<number>;
 }) {
-  let baseList = props.list.map((v, i) => [v, props.orders[i]]);
-  const [list, setList] = useState([...baseList]);
   return (
     <div className="number-list horizontal-list">
-      {list.map(([value, order], i) => (
+      {props.list.map((value, i) => (
         <NumberBox
           key={`number-box-${value}-${i}`}
-          order={order}
+          order={props.orders[i]}
           value={value}
-          compare={props.compare.includes(order)}
+          compare={props.compare.includes(props.orders[i])}
+          markComplete={props.markComplete.includes(i)}
         />
       ))}
     </div>

@@ -136,7 +136,14 @@ Number Boxes
   display: grid;
   place-content: center;
 }
+.number-list{
+  transition:  order 1s;
+}
 
 .green-border{
   outline: green solid 3px;
+}
+
+.green-bg{
+  background-color: green;
 }
