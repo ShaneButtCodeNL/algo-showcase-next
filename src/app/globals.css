@@ -4,6 +4,7 @@
   --background: #ffffff;
   --background-fade: #0000001e;
   --foreground: #171717;
+  --secondary-background:#aaaaaa;
   interpolate-size: allow-keywords;
 
 }
@@ -20,7 +21,7 @@
   :root {
     --background: #0a0a0a;
     --background-fade: #ffffff1e;
-
+    --secondary-background: #333333;
     --foreground: #ededed;
   }
 }
@@ -139,6 +140,25 @@ Number Boxes
 .number-list{
   transition:  order 1s;
 }
+
+/*
+Bar Boxes
+*/
+.bar-box{
+  outline: 1px solid;
+  flex-grow: 1;
+  background-color: var(--secondary-background);
+  max-width: 100px;
+}
+
+.bar-list{
+  gap: 0;
+  margin: 1rem;
+}
+
+/*
+General
+*/
 
 .green-border{
   outline: green solid 3px;

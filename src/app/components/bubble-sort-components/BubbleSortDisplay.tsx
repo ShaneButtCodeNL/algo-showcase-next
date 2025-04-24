@@ -4,6 +4,7 @@ import bubbleSortAlgo from "@/app/algorithm-code/bubbleSortAlgo";
 import { times } from "@/constants";
 import { Dispatch, SetStateAction, useState } from "react";
 import NumberList from "../front-end/NumberList";
+import BarList from "../front-end/BarList";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -30,10 +31,16 @@ export default function BubbleSortDisplay(props: any) {
         <NumberList
           list={list.map((v) => v)}
           orders={orders.map((v) => v)}
-          compare={[p1, p2]}
+          highlights={[p1, p2]}
           markComplete={sorted}
         />
       }
+      <BarList
+        list={list.map((v) => v)}
+        orders={orders.map((v) => v)}
+        highlights={[p1, p2]}
+        markComplete={sorted}
+      />
       <div id="bs-sort-controls">
         <button
           id="bs-sort-button"

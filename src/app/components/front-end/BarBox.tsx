@@ -1,4 +1,4 @@
-export default function NumberBox(props: {
+export default function BarBox(props: {
   value: number;
   order: number;
   highlight: boolean;
@@ -8,10 +8,9 @@ export default function NumberBox(props: {
     <div
       className={`${props.highlight ? "green-border" : ""} ${
         props.markComplete ? "green-bg" : ""
-      } number-box `}
-      style={{ order: props.order }}
-    >
-      {props.value}
-    </div>
+      } bar-box`}
+      style={{ order: props.order, height: `${props.value * 30}px` }}
+      data-value={`${props.value}`}
+    ></div>
   );
 }

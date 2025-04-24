@@ -1,18 +1,18 @@
-import NumberBox from "./NumberBox";
+import BarBox from "./BarBox";
 
-export default function NumberList(props: {
+export default function BarList(props: {
   list: Array<number>;
   orders: Array<number>;
   highlights: Array<number>;
   markComplete: Array<number>;
 }) {
   return (
-    <div className="number-list horizontal-list">
-      {props.list.map((value, i) => (
-        <NumberBox
-          key={`number-box-${value}-${i}`}
+    <div className="bar-list horizontal-list">
+      {props.list.map((v, i) => (
+        <BarBox
+          key={`bar-box-${v}-${i}`}
           order={props.orders[i]}
-          value={value}
+          value={v}
           highlight={props.highlights.includes(props.orders[i])}
           markComplete={props.markComplete.includes(i)}
         />
