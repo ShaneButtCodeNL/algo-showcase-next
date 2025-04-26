@@ -5,6 +5,7 @@ import { times } from "@/constants";
 import { Dispatch, SetStateAction, useState } from "react";
 import NumberList from "../front-end/NumberList";
 import BarList from "../front-end/BarList";
+import BubbleSortControlBox from "./BubbleSortControlBox";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -22,6 +23,27 @@ export default function BubbleSortDisplay(props: any) {
     useState(null);
   const speed = 0;
   const speeds = times;
+  const makeAnimation = () => {
+    if (animation === null) {
+      var interval = setInterval(() => {
+        setStep((v) => {
+          v += 1;
+          setP1(animationFrames[v].p1);
+          setP2(animationFrames[v].p2);
+          setList(animationFrames[v].list);
+          setSorted(animationFrames[v].sorted);
+          setCompares(animationFrames[v].compares);
+          setSwaps(animationFrames[v].swaps);
+          if (v === animationFrames.length - 1) {
+            clearInterval(interval);
+            setAnimation(null);
+          }
+          return v;
+        });
+      }, 300);
+      setAnimation(interval);
+    }
+  };
 
   console.log(animationFrames);
   return (
@@ -82,6 +104,12 @@ export default function BubbleSortDisplay(props: any) {
         <br />
         p2 : {p2}
       </div>
+      <BubbleSortControlBox
+        setList={setList}
+        reset={() => {}}
+        setStep={setStep}
+        makeAnimation={makeAnimation}
+      />
     </div>
   );
 }
