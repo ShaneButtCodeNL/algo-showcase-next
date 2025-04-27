@@ -2,14 +2,14 @@
 
 import bubbleSortAlgo from "@/app/algorithm-code/bubbleSortAlgo";
 import { times } from "@/constants";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import NumberList from "../front-end/NumberList";
 import BarList from "../front-end/BarList";
 import BubbleSortControlBox from "./BubbleSortControlBox";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-  const animationFrames = bubbleSortAlgo(sampleList);
+  let animationFrames = bubbleSortAlgo(sampleList);
 
   const [orders, setOrders] = useState(animationFrames[0].orders);
   const [list, setList] = useState(animationFrames[0].list);
@@ -44,8 +44,9 @@ export default function BubbleSortDisplay(props: any) {
       setAnimation(interval);
     }
   };
-
-  console.log(animationFrames);
+  useEffect(() => {
+    animationFrames = bubbleSortAlgo(list);
+  }, [list]);
   return (
     <div>
       <div>bubbleSort {step}</div>
@@ -109,6 +110,7 @@ export default function BubbleSortDisplay(props: any) {
         reset={() => {}}
         setStep={setStep}
         makeAnimation={makeAnimation}
+        setOrders={setOrders}
       />
     </div>
   );
