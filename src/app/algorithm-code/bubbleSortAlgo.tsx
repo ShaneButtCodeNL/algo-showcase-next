@@ -59,6 +59,8 @@ export default function bubbleSortAlgo(inputList: Array<number>) {
         list: [...list],
         orders: [...orders],
       });
+      res[res.length - 1].p1 = -1;
+      res[res.length - 1].p2 = -1;
       return res;
     }
     sortCount--;

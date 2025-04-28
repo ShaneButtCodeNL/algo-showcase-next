@@ -50,6 +50,7 @@ export default function BubbleSortControlBox(props: {
           props.setOrders(
             Array.from({ length: parseInt(e.target.value) }, (_, i) => i)
           );
+          props.reset();
         }}
       />
       <datalist id="list-size-values">
@@ -70,6 +71,14 @@ export default function BubbleSortControlBox(props: {
         data-area="input-randomize"
         className="bubblesort-input"
         style={{ gridArea: "input-randomize" }}
+        onClick={(_) => {
+          props.setList(
+            Array.from({ length: listSize }, (_) =>
+              Math.ceil(100 * Math.random())
+            )
+          );
+          props.reset();
+        }}
       >
         Randomize
       </button>
@@ -84,6 +93,15 @@ export default function BubbleSortControlBox(props: {
         data-area="input-shuffle"
         className="bubblesort-input"
         style={{ gridArea: "input-shuffle" }}
+        onClick={(_) => {
+          props.setList((arr: number[]) =>
+            arr
+              .map((v) => [v, Math.random()])
+              .sort((a, b) => a[1] - b[1])
+              .map((v) => v[0])
+          );
+          props.reset();
+        }}
       >
         Shuffle
       </button>

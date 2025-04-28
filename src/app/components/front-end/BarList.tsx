@@ -6,6 +6,7 @@ export default function BarList(props: {
   highlights: Array<number>;
   markComplete: Array<number>;
 }) {
+  const max = Math.max(...props.list);
   return (
     <div className="bar-list horizontal-list">
       {props.list.map((v, i) => (
@@ -15,6 +16,7 @@ export default function BarList(props: {
           value={v}
           highlight={props.highlights.includes(props.orders[i])}
           markComplete={props.markComplete.includes(i)}
+          height={Math.max(1, Math.floor((v / max) * 100))}
         />
       ))}
     </div>

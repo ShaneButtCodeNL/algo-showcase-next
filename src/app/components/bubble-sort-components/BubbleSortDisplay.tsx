@@ -23,6 +23,18 @@ export default function BubbleSortDisplay(props: any) {
     useState(null);
   const speed = 0;
   const speeds = times;
+  const reset = () => {
+    setP1(-1);
+    setP2(-1);
+    setStep(0);
+    setSwaps(0);
+    setCompares(0);
+    setSorted([]);
+    if (animation) {
+      clearInterval(animation);
+      setAnimation(null);
+    }
+  };
   const makeAnimation = () => {
     if (animation === null) {
       var interval = setInterval(() => {
@@ -48,8 +60,8 @@ export default function BubbleSortDisplay(props: any) {
     animationFrames = bubbleSortAlgo(list);
   }, [list]);
   return (
-    <div>
-      <div>bubbleSort {step}</div>
+    <div className="main-content-wrapper">
+      <p>bubbleSort {step}</p>
       {
         <NumberList
           list={list.map((v) => v)}
@@ -107,7 +119,7 @@ export default function BubbleSortDisplay(props: any) {
       </div>
       <BubbleSortControlBox
         setList={setList}
-        reset={() => {}}
+        reset={reset}
         setStep={setStep}
         makeAnimation={makeAnimation}
         setOrders={setOrders}

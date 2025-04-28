@@ -33,14 +33,24 @@ body {
 }
 
 main {
+  position: relative;
   display: grid;
   grid-template-areas:
     "sb sb-btn tit"
     "sb sb-btn bod";
-  grid-template-rows: 1fr 10fr;
+  grid-template-rows: 6rem 10fr;
   grid-template-columns: 35ch 1rem 1fr;
   min-height: 100vh;
   transition: 300ms ease-out;
+  max-width: 100vw;
+}
+
+.main-content{
+  max-width: 100vw;
+}
+
+.main-content-wrapper{
+  max-width: 100%;
 }
 
 .title-bar {
@@ -138,7 +148,8 @@ Number Boxes
   place-content: center;
 }
 .number-list{
-  transition:  order 1s;
+  flex-wrap: wrap;
+  margin: 1rem;
 }
 
 /*
