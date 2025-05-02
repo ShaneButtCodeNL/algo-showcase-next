@@ -21,6 +21,7 @@ export default function BubbleSortDisplay(props: any) {
   const [step, setStep] = useState(0);
   const [animation, setAnimation]: [null | NodeJS.Timeout, any] =
     useState(null);
+  const [displayNumbers, setDisplayNumbers] = useState(true);
   const speed = 0;
   const speeds = times;
   const reset = () => {
@@ -62,20 +63,30 @@ export default function BubbleSortDisplay(props: any) {
   return (
     <div className="main-content-wrapper">
       <p>bubbleSort {step}</p>
-      {
+      <BubbleSortControlBox
+        setList={setList}
+        reset={reset}
+        setStep={setStep}
+        makeAnimation={makeAnimation}
+        setOrders={setOrders}
+        displayNumbers={displayNumbers}
+        setDisplayNumbers={setDisplayNumbers}
+      />
+      {displayNumbers ? (
         <NumberList
           list={list.map((v) => v)}
           orders={orders.map((v) => v)}
           highlights={[p1, p2]}
           markComplete={sorted}
         />
-      }
-      <BarList
-        list={list.map((v) => v)}
-        orders={orders.map((v) => v)}
-        highlights={[p1, p2]}
-        markComplete={sorted}
-      />
+      ) : (
+        <BarList
+          list={list.map((v) => v)}
+          orders={orders.map((v) => v)}
+          highlights={[p1, p2]}
+          markComplete={sorted}
+        />
+      )}
       <div id="bs-sort-controls">
         <button
           id="bs-sort-button"
@@ -117,13 +128,6 @@ export default function BubbleSortDisplay(props: any) {
         <br />
         p2 : {p2}
       </div>
-      <BubbleSortControlBox
-        setList={setList}
-        reset={reset}
-        setStep={setStep}
-        makeAnimation={makeAnimation}
-        setOrders={setOrders}
-      />
     </div>
   );
 }

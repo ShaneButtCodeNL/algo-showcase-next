@@ -156,10 +156,11 @@ Number Boxes
 Bar Boxes
 */
 .bar-box{
-  outline: 1px solid;
+  border: 1px solid;
   flex-grow: 1;
   background-color: var(--secondary-background);
   max-width: 100px;
+  box-sizing: border-box;
 }
 
 .bar-list{
@@ -177,19 +178,18 @@ BubbleSort controls
   line-height: 1.5rem;
   display: grid;
   grid-template-areas:
-    "label-list-controls label-list-controls label-list-controls label-list-controls"
-    "label-size label-size input-size input-size"
-    "label-randomize label-randomize input-randomize input-randomize"
-    "label-shuffle label-shuffle input-shuffle input-shuffle"
-    "play stop reset .";
-  grid-template-columns:  var(--col-size) var(--col-size) var(--col-size) var(--col-size) ;
-  grid-template-rows: var(--row-size) var(--row-size) var(--row-size) var(--row-size) var(--row-size)  ;
+    ". . label-list-controls label-list-controls label-list-controls label-list-controls . ."
+    "label-size label-size input-size input-size label-display label-display input-display input-display"
+    "label-randomize label-randomize input-randomize input-randomize label-shuffle label-shuffle input-shuffle input-shuffle"
+    ". play stop reset next prev end .";
+  grid-template-columns:  var(--col-size) var(--col-size) var(--col-size) var(--col-size) var(--col-size) var(--col-size) var(--col-size) var(--col-size);
+  grid-template-rows:  var(--row-size) var(--row-size) var(--row-size) var(--row-size)  ;
   border: dashed 1px;
   width: fit-content;
   margin: 2rem;
   border-radius: 1rem;
   padding: 1rem;
-  row-gap: .5rem;
+  row-gap: 1rem;
   column-gap: 1rem;
 }
 
@@ -205,7 +205,7 @@ General
 */
 
 .green-border{
-  outline: green solid 3px;
+  border: green solid 5px;
 }
 
 .green-bg{

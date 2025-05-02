@@ -8,6 +8,8 @@ export default function BubbleSortControlBox(props: {
   setStep: Function;
   makeAnimation: Function;
   setOrders: Function;
+  displayNumbers: boolean;
+  setDisplayNumbers: Function;
 }) {
   const listSizeRef = useRef(null);
   const [listSize, setListSize] = useState(10);
@@ -105,6 +107,24 @@ export default function BubbleSortControlBox(props: {
       >
         Shuffle
       </button>
+      <label className="bubblesort-label" style={{ gridArea: "label-display" }}>
+        Display{" "}
+      </label>
+      <button
+        style={{ gridArea: "input-display" }}
+        onClick={(e) => {
+          e.preventDefault();
+          props.setDisplayNumbers((e: any) => !e);
+        }}
+      >
+        {props.displayNumbers ? "Bars" : "Numbers"}
+      </button>
+      <button style={{ gridArea: "play" }}>play</button>
+      <button style={{ gridArea: "stop" }}>stop</button>
+      <button style={{ gridArea: "reset" }}>reset</button>
+      <button style={{ gridArea: "next" }}>forward</button>
+      <button style={{ gridArea: "prev" }}>Back</button>
+      <button style={{ gridArea: "end" }}>End</button>
     </div>
   );
 }
