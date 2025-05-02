@@ -9,9 +9,12 @@ import BubbleSortControlBox from "./BubbleSortControlBox";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-  let animationFrames = bubbleSortAlgo(sampleList);
+  const [animationFrames, setAnimationFrames] = useState(
+    bubbleSortAlgo(sampleList)
+  );
 
   const [orders, setOrders] = useState(animationFrames[0].orders);
+  const [ren, rerender] = useState(false);
   const [list, setList] = useState(animationFrames[0].list);
   const [p1, setP1] = useState(-1);
   const [p2, setP2] = useState(-1);
@@ -24,6 +27,12 @@ export default function BubbleSortDisplay(props: any) {
   const [displayNumbers, setDisplayNumbers] = useState(true);
   const speed = 0;
   const speeds = times;
+  const pause = () => {
+    if (animation) {
+      clearInterval(animation);
+      setAnimation(null);
+    }
+  };
   const reset = () => {
     setP1(-1);
     setP2(-1);
@@ -36,85 +45,82 @@ export default function BubbleSortDisplay(props: any) {
       setAnimation(null);
     }
   };
-  const makeAnimation = () => {
+  const nextFrame = () => {
+    setStep((v) => Math.min(v + 1, animationFrames.length - 1));
+  };
+  const prevFrame = () => setStep((v) => Math.max(0, v - 1));
+  const makeAnimation = (time = 300) => {
     if (animation === null) {
       var interval = setInterval(() => {
-        setStep((v) => {
-          v += 1;
-          setP1(animationFrames[v].p1);
-          setP2(animationFrames[v].p2);
-          setList(animationFrames[v].list);
-          setSorted(animationFrames[v].sorted);
-          setCompares(animationFrames[v].compares);
-          setSwaps(animationFrames[v].swaps);
-          if (v === animationFrames.length - 1) {
-            clearInterval(interval);
-            setAnimation(null);
-          }
-          return v;
-        });
-      }, 300);
+        setStep((v) => (v += 1));
+      }, time);
       setAnimation(interval);
     }
   };
+  const updateList = (arr: Array<number>) => {
+    setAnimationFrames([...bubbleSortAlgo(arr)]);
+    setList([...arr]);
+    rerender((e) => !e);
+  };
+  const suffleList = () => {
+    if (!list) return;
+    const newList = list
+      .map((v) => [v, Math.random()])
+      .sort((a, b) => a[1] - b[1])
+      .map((v) => v[0]);
+    updateList(newList);
+  };
   useEffect(() => {
-    animationFrames = bubbleSortAlgo(list);
-  }, [list]);
+    setP1(animationFrames[step].p1);
+    setP2(animationFrames[step].p2);
+    setList(animationFrames[step].list);
+    setSorted(animationFrames[step].sorted);
+    setCompares(animationFrames[step].compares);
+    setSwaps(animationFrames[step].swaps);
+    if (animation && step === animationFrames.length - 1) {
+      clearInterval(animation);
+      setAnimation(null);
+    }
+  }, [step]);
+  useEffect(() => {
+    setStep(0);
+  }, [animationFrames]);
   return (
     <div className="main-content-wrapper">
-      <p>bubbleSort {step}</p>
+      <p>
+        bubbleSort {ren ? "1-" : "2-"}
+        {step}
+      </p>
       <BubbleSortControlBox
-        setList={setList}
+        updateList={updateList}
         reset={reset}
         setStep={setStep}
         makeAnimation={makeAnimation}
+        pause={pause}
+        nextFrame={nextFrame}
+        prevFrame={prevFrame}
+        lastFrame={() => setStep(animationFrames.length - 1)}
         setOrders={setOrders}
         displayNumbers={displayNumbers}
         setDisplayNumbers={setDisplayNumbers}
+        shuffleList={suffleList}
+        isAnimated={animation !== null}
       />
       {displayNumbers ? (
         <NumberList
-          list={list.map((v) => v)}
-          orders={orders.map((v) => v)}
+          list={list}
+          orders={orders}
           highlights={[p1, p2]}
           markComplete={sorted}
         />
       ) : (
         <BarList
-          list={list.map((v) => v)}
-          orders={orders.map((v) => v)}
+          list={list}
+          orders={orders}
           highlights={[p1, p2]}
           markComplete={sorted}
         />
       )}
-      <div id="bs-sort-controls">
-        <button
-          id="bs-sort-button"
-          onClick={() => {
-            if (animation === null) {
-              var interval = setInterval(() => {
-                setStep((v) => {
-                  v += 1;
-                  setP1(animationFrames[v].p1);
-                  setP2(animationFrames[v].p2);
-                  setList(animationFrames[v].list);
-                  setSorted(animationFrames[v].sorted);
-                  setCompares(animationFrames[v].compares);
-                  setSwaps(animationFrames[v].swaps);
-                  if (v === animationFrames.length - 1) {
-                    clearInterval(interval);
-                    setAnimation(null);
-                  }
-                  return v;
-                });
-              }, 300);
-              setAnimation(interval);
-            }
-          }}
-        >
-          Start
-        </button>
-      </div>
       <div>
         Stats
         <br />
@@ -127,6 +133,8 @@ export default function BubbleSortDisplay(props: any) {
         p1: {p1}
         <br />
         p2 : {p2}
+        <br />
+        total frames: {animationFrames.length}
       </div>
     </div>
   );

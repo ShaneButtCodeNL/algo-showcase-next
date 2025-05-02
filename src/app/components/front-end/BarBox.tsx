@@ -10,7 +10,7 @@ export default function BarBox(props: {
       className={`${props.highlight ? "green-border" : ""} ${
         props.markComplete ? "green-bg" : ""
       } bar-box`}
-      style={{ order: props.order, height: `${props.height * 5}px` }}
+      style={{ height: `${props.height * 5}px` }}
       data-value={`${props.value}`}
     ></div>
   );

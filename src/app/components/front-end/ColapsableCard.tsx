@@ -21,6 +21,7 @@ export default function CollapsableCard(props: {
           <h2>{props.title}</h2>
         )}
         <button
+          className="basic-button"
           onClick={(e) => {
             e.preventDefault();
             setOpen((v) => !v);

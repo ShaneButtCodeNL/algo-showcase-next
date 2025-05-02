@@ -13,7 +13,7 @@ export default function NumberList(props: {
           key={`number-box-${value}-${i}`}
           order={props.orders[i]}
           value={value}
-          highlight={props.highlights.includes(props.orders[i])}
+          highlight={props.highlights.includes(i)}
           markComplete={props.markComplete.includes(i)}
         />
       ))}

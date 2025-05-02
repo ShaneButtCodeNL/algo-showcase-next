@@ -3,9 +3,28 @@ export default function bubbleSortAlgo(inputList: Array<number>) {
   let swaps = 0;
   let sortCount = inputList.length;
   let sorted = new Set([sortCount]);
-  let res = [];
+
   let list = inputList.map((v) => v);
   let orders = Array.from({ length: list.length }, (_, i) => i);
+  let res: Array<{
+    p1: number;
+    p2: number;
+    swaps: number;
+    compares: number;
+    sorted: Array<number>;
+    list: Array<number>;
+    orders: Array<number>;
+  }> = [
+    {
+      p1: -1,
+      p2: -1,
+      swaps,
+      compares,
+      sorted: [],
+      list: [...list],
+      orders: [...orders],
+    },
+  ];
   for (let i = 1; i < list.length; i++) {
     let p1 = 0;
     let p2 = 1;

@@ -3,13 +3,19 @@
 import { useRef, useState } from "react";
 
 export default function BubbleSortControlBox(props: {
-  setList: Function;
+  updateList: Function;
   reset: Function;
   setStep: Function;
   makeAnimation: Function;
   setOrders: Function;
   displayNumbers: boolean;
   setDisplayNumbers: Function;
+  pause: Function;
+  lastFrame: Function;
+  nextFrame: Function;
+  prevFrame: Function;
+  shuffleList: Function;
+  isAnimated: boolean;
 }) {
   const listSizeRef = useRef(null);
   const [listSize, setListSize] = useState(10);
@@ -46,13 +52,9 @@ export default function BubbleSortControlBox(props: {
         list="list-size-values"
         onChange={(e) => {
           setListSize(parseInt(e.target.value));
-          props.setList(
+          props.updateList(
             Array.from({ length: parseInt(e.target.value) }, (_, i) => i + 1)
           );
-          props.setOrders(
-            Array.from({ length: parseInt(e.target.value) }, (_, i) => i)
-          );
-          props.reset();
         }}
       />
       <datalist id="list-size-values">
@@ -74,12 +76,11 @@ export default function BubbleSortControlBox(props: {
         className="bubblesort-input"
         style={{ gridArea: "input-randomize" }}
         onClick={(_) => {
-          props.setList(
+          props.updateList(
             Array.from({ length: listSize }, (_) =>
               Math.ceil(100 * Math.random())
             )
           );
-          props.reset();
         }}
       >
         Randomize
@@ -96,13 +97,7 @@ export default function BubbleSortControlBox(props: {
         className="bubblesort-input"
         style={{ gridArea: "input-shuffle" }}
         onClick={(_) => {
-          props.setList((arr: number[]) =>
-            arr
-              .map((v) => [v, Math.random()])
-              .sort((a, b) => a[1] - b[1])
-              .map((v) => v[0])
-          );
-          props.reset();
+          props.shuffleList();
         }}
       >
         Shuffle
@@ -119,12 +114,30 @@ export default function BubbleSortControlBox(props: {
       >
         {props.displayNumbers ? "Bars" : "Numbers"}
       </button>
-      <button style={{ gridArea: "play" }}>play</button>
-      <button style={{ gridArea: "stop" }}>stop</button>
-      <button style={{ gridArea: "reset" }}>reset</button>
-      <button style={{ gridArea: "next" }}>forward</button>
-      <button style={{ gridArea: "prev" }}>Back</button>
-      <button style={{ gridArea: "end" }}>End</button>
+      {props.isAnimated ? (
+        <button style={{ gridArea: "play" }} onClick={() => props.pause()}>
+          stop
+        </button>
+      ) : (
+        <button
+          style={{ gridArea: "play" }}
+          onClick={() => props.makeAnimation()}
+        >
+          play
+        </button>
+      )}
+      <button style={{ gridArea: "reset" }} onClick={() => props.reset()}>
+        reset
+      </button>
+      <button style={{ gridArea: "next" }} onClick={() => props.nextFrame()}>
+        forward
+      </button>
+      <button style={{ gridArea: "prev" }} onClick={() => props.prevFrame()}>
+        Back
+      </button>
+      <button style={{ gridArea: "end" }} onClick={() => props.lastFrame()}>
+        End
+      </button>
     </div>
   );
 }

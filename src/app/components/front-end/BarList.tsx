@@ -14,7 +14,7 @@ export default function BarList(props: {
           key={`bar-box-${v}-${i}`}
           order={props.orders[i]}
           value={v}
-          highlight={props.highlights.includes(props.orders[i])}
+          highlight={props.highlights.includes(i)}
           markComplete={props.markComplete.includes(i)}
           height={Math.max(1, Math.floor((v / max) * 100))}
         />

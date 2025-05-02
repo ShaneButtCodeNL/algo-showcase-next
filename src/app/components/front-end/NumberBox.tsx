@@ -9,7 +9,6 @@ export default function NumberBox(props: {
       className={`${props.highlight ? "green-border" : ""} ${
         props.markComplete ? "green-bg" : ""
       } number-box `}
-      style={{ order: props.order }}
     >
       {props.value}
     </div>
