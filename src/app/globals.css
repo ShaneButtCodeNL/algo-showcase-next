@@ -212,7 +212,28 @@ BubbleSort controls
   text-align: right;
 }
 
+.bubble-sort-info-box{
+  margin:  2rem 3rem;
+  display: grid;
+  grid-template-areas: 
+  "title title"
+  "left right";
+  place-content: center;
+  gap: .5rem;
+  border: dashed 1px;
+  padding: 2rem;
+  flex-grow: 1;
+  border-radius: 1rem;
+}
 
+.bubble-sort-col{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas: 
+    "top-left top-right"
+    "mid-left mid-right"
+    "bot-left bot-right";
+}
 
 /*
 General

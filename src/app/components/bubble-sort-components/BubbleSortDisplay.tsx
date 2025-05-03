@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import NumberList from "../front-end/NumberList";
 import BarList from "../front-end/BarList";
 import BubbleSortControlBox from "./BubbleSortControlBox";
+import BubbleSortInfo from "./BubbleSortInfo";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -91,21 +92,31 @@ export default function BubbleSortDisplay(props: any) {
         bubbleSort {ren ? "1-" : "2-"}
         {step}
       </p>
-      <BubbleSortControlBox
-        updateList={updateList}
-        reset={reset}
-        setStep={setStep}
-        makeAnimation={makeAnimation}
-        pause={pause}
-        nextFrame={nextFrame}
-        prevFrame={prevFrame}
-        lastFrame={() => setStep(animationFrames.length - 1)}
-        setOrders={setOrders}
-        displayNumbers={displayNumbers}
-        setDisplayNumbers={setDisplayNumbers}
-        shuffleList={suffleList}
-        isAnimated={animation !== null}
-      />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <BubbleSortControlBox
+          updateList={updateList}
+          reset={reset}
+          setStep={setStep}
+          makeAnimation={makeAnimation}
+          pause={pause}
+          nextFrame={nextFrame}
+          prevFrame={prevFrame}
+          lastFrame={() => setStep(animationFrames.length - 1)}
+          setOrders={setOrders}
+          displayNumbers={displayNumbers}
+          setDisplayNumbers={setDisplayNumbers}
+          shuffleList={suffleList}
+          isAnimated={animation !== null}
+        />
+        <BubbleSortInfo
+          p1={p1}
+          p2={p2}
+          swaps={swaps}
+          compares={compares}
+          frame={step + 1}
+          totalFrames={animationFrames.length}
+        />
+      </div>
       {displayNumbers ? (
         <NumberList
           list={list}
@@ -121,21 +132,6 @@ export default function BubbleSortDisplay(props: any) {
           markComplete={sorted}
         />
       )}
-      <div>
-        Stats
-        <br />
-        Frame : {step}
-        <br />
-        Swaps : {swaps}
-        <br />
-        Compares : {compares}
-        <br />
-        p1: {p1}
-        <br />
-        p2 : {p2}
-        <br />
-        total frames: {animationFrames.length}
-      </div>
     </div>
   );
 }
