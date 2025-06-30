@@ -7,6 +7,7 @@ import NumberList from "../front-end/NumberList";
 import BarList from "../front-end/BarList";
 import BubbleSortControlBox from "./BubbleSortControlBox";
 import BubbleSortInfo from "./BubbleSortInfo";
+import BubbleSortControlBoxHamburger from "./BubbleSortControlBoxHamburger";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];

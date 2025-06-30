@@ -212,6 +212,50 @@ BubbleSort controls
   column-gap: 1rem;
 }
 
+.hamburger-icon-container{
+  --hamburger-transition:top 1s 500ms,bottom 1s 500ms ,transform 2s;
+  display: none;
+  margin: 0 1rem;
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  background-color: var(--highlight);
+  border-radius: .6rem;
+  cursor: pointer;
+}
+.hamburger-icon{
+  position: relative;
+  overflow: clip;
+  transition: var(--hamburger-transition);
+
+}
+.closed-hamburger-icon{
+  --hamburger-transition:top 1500ms 500ms,bottom 1500ms 500ms ,transform 1500ms 500ms;
+}
+.open-hamburger-icon{
+  transform: rotate(360deg);
+}
+.hamburger-icon::before{
+  content: "_";
+  width: 100%;
+  height: 100%;
+  top: -.3rem;
+  right: 0%;
+  position: absolute;
+  font-size: larger;
+  transition: var(--hamburger-transition);
+
+}
+.hamburger-icon::after{
+  content: "_";
+  width: 100%;
+  height: 100%;
+  bottom:.7rem;
+  right: 0%;
+  position: absolute;
+  font-size: larger;
+  transition: var(--hamburger-transition);
+}
 
 .bubblesort-label{
   text-align: right;
@@ -281,10 +325,19 @@ General
   }
 }
 @media only screen and (max-width:780){
-  .bs-info-box{
-    display: none;
+  .hamburger-icon-container{
+    display:inline-block;
   }
   .bs-info-box-compressed{
     display: flex;
+  }
+  .open-hamburger-icon{
+    transform: rotate(360deg);
+  }
+  .open-hamburger-icon::before{
+    top: 50%;
+  }
+  .open-hamburger-icon::after{
+    bottom:100%;
   }
 }

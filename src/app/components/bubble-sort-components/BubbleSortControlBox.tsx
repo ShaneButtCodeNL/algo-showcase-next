@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import BubbleSortControlBoxHamburger from "./BubbleSortControlBoxHamburger";
 
 export default function BubbleSortControlBox(props: {
   updateList: Function;
@@ -31,6 +32,7 @@ export default function BubbleSortControlBox(props: {
         style={{ gridArea: "label-list-controls", textAlign: "center" }}
       >
         List Controls
+        <BubbleSortControlBoxHamburger />
       </label>
       <label
         data-area="label-size"
