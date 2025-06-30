@@ -15,7 +15,6 @@ export default function BubbleSortDisplay(props: any) {
   );
 
   const [orders, setOrders] = useState(animationFrames[0].orders);
-  const [ren, rerender] = useState(false);
   const [list, setList] = useState(animationFrames[0].list);
   const [p1, setP1] = useState(-1);
   const [p2, setP2] = useState(-1);
@@ -61,7 +60,6 @@ export default function BubbleSortDisplay(props: any) {
   const updateList = (arr: Array<number>) => {
     setAnimationFrames([...bubbleSortAlgo(arr)]);
     setList([...arr]);
-    rerender((e) => !e);
   };
   const suffleList = () => {
     if (!list) return;
@@ -88,11 +86,8 @@ export default function BubbleSortDisplay(props: any) {
   }, [animationFrames]);
   return (
     <div className="main-content-wrapper">
-      <p>
-        bubbleSort {ren ? "1-" : "2-"}
-        {step}
-      </p>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <p>bubbleSort</p>
+      <div className="bs-info-box">
         <BubbleSortControlBox
           updateList={updateList}
           reset={reset}

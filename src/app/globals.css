@@ -42,7 +42,7 @@ main {
     "sb sb-btn tit"
     "sb sb-btn bod";
   grid-template-rows: 6rem 10fr;
-  grid-template-columns: 35ch 1rem 1fr;
+  grid-template-columns: 35ch auto 1fr;
   min-height: 100vh;
   transition: 300ms ease-out;
   max-width: 100vw;
@@ -89,8 +89,10 @@ Side bar
 
 .sidebar-slider {
   grid-area: sb-btn;
-  border-right: solid white;
+  border-right:  2px solid white;
   background-color: var(--background-fade);
+  border-radius: 0;
+  padding: 0;
 }
 
 /*
@@ -170,7 +172,6 @@ Number Boxes
 Bar Boxes
 */
 .bar-box{
-  border: 1px solid;
   flex-grow: 1;
   background-color: var(--secondary-background);
   max-width: 100px;
@@ -185,6 +186,10 @@ Bar Boxes
 /*
 BubbleSort controls
 */
+.bs-info-box{
+  display: flex;
+  flex-direction: row;
+}
 
 .bubblesort-control-box{
   --col-size:5rem;
@@ -245,4 +250,41 @@ General
 
 .green-bg{
   background-color: green;
+}
+
+@media only screen and (max-width:1630) {
+  .bs-info-box{
+    flex-direction: column;
+  }
+  .bubble-sort-info-box{
+    margin: 0 auto 0 2rem;
+    flex-grow: 0;
+  }
+}
+
+@media only screen and (max-width:1160){
+  .bubblesort-control-box{
+    --col-size:10rem;
+    grid-template-areas: "label-list-controls label-list-controls"
+    "label-size input-size"
+    "label-display input-display"
+    "label-randomize input-randomize"
+    "label-shuffle input-shuffle"
+    "play play"
+    "next prev"
+    "reset end";
+    grid-template-columns: repeat(2,var(--col-size));
+    grid-template-rows: repeat(7,--row-size);
+  }
+  .bubblesort-label{
+    text-align: center;
+  }
+}
+@media only screen and (max-width:780){
+  .bs-info-box{
+    display: none;
+  }
+  .bs-info-box-compressed{
+    display: flex;
+  }
 }
