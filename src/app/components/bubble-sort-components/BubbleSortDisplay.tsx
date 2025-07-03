@@ -7,7 +7,7 @@ import NumberList from "../front-end/NumberList";
 import BarList from "../front-end/BarList";
 import BubbleSortControlBox from "./BubbleSortControlBox";
 import BubbleSortInfo from "./BubbleSortInfo";
-import BubbleSortControlBoxHamburger from "./BubbleSortControlBoxHamburger";
+import HamburgerIcon from "../front-end/HamburgerIcon";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -88,6 +88,7 @@ export default function BubbleSortDisplay(props: any) {
   return (
     <div className="main-content-wrapper">
       <p>bubbleSort</p>
+      <HamburgerIcon />
       <div className="bs-info-box">
         <BubbleSortControlBox
           updateList={updateList}
