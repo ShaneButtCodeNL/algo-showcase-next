@@ -1,0 +1,33 @@
+.hamburgerMenu {
+  width: fit-content;
+  position: relative;
+  display: grid;
+  grid-template-rows: 2rem auto;
+  overflow: clip;
+  transition: height 1s;
+  height: 2rem;
+  max-height: 20rem;
+}
+
+.openMenu {
+  height: 20rem;
+}
+
+.hamburgerMenuHeader {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.hamburgerMenuTitle {
+  display: grid;
+  place-items: center;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.hamburgerMenuContent {
+  overflow-y: auto;
+  overflow-x: clip;
+  padding: 0 1rem;
+}

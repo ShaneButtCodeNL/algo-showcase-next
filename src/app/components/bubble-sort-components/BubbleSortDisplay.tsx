@@ -2,12 +2,13 @@
 
 import bubbleSortAlgo from "@/app/algorithm-code/bubbleSortAlgo";
 import { times } from "@/constants";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NumberList from "../front-end/NumberList";
 import BarList from "../front-end/BarList";
 import BubbleSortControlBox from "./BubbleSortControlBox";
 import BubbleSortInfo from "./BubbleSortInfo";
-import HamburgerIcon from "../front-end/HamburgerIcon";
+import HamburgerMenu from "../front-end/HamburgerMenu";
+import styles from "./BubbleSortDisplay.module.css";
 
 export default function BubbleSortDisplay(props: any) {
   let sampleList = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -88,31 +89,40 @@ export default function BubbleSortDisplay(props: any) {
   return (
     <div className="main-content-wrapper">
       <p>bubbleSort</p>
-      <HamburgerIcon />
       <div className="bs-info-box">
-        <BubbleSortControlBox
-          updateList={updateList}
-          reset={reset}
-          setStep={setStep}
-          makeAnimation={makeAnimation}
-          pause={pause}
-          nextFrame={nextFrame}
-          prevFrame={prevFrame}
-          lastFrame={() => setStep(animationFrames.length - 1)}
-          setOrders={setOrders}
-          displayNumbers={displayNumbers}
-          setDisplayNumbers={setDisplayNumbers}
-          shuffleList={suffleList}
-          isAnimated={animation !== null}
-        />
-        <BubbleSortInfo
-          p1={p1}
-          p2={p2}
-          swaps={swaps}
-          compares={compares}
-          frame={step + 1}
-          totalFrames={animationFrames.length}
-        />
+        <div className={styles.bigScreen}>
+          <BubbleSortControlBox
+            updateList={updateList}
+            reset={reset}
+            setStep={setStep}
+            makeAnimation={makeAnimation}
+            pause={pause}
+            nextFrame={nextFrame}
+            prevFrame={prevFrame}
+            lastFrame={() => setStep(animationFrames.length - 1)}
+            setOrders={setOrders}
+            displayNumbers={displayNumbers}
+            setDisplayNumbers={setDisplayNumbers}
+            shuffleList={suffleList}
+            isAnimated={animation !== null}
+          />
+          <BubbleSortInfo
+            p1={p1}
+            p2={p2}
+            swaps={swaps}
+            compares={compares}
+            frame={step + 1}
+            totalFrames={animationFrames.length}
+          />
+        </div>
+        <div className={styles.smallScreen}>
+          <HamburgerMenu title="List Controls">
+            <></>
+          </HamburgerMenu>
+          <HamburgerMenu title="Information">
+            <></>
+          </HamburgerMenu>
+        </div>
       </div>
       {displayNumbers ? (
         <NumberList

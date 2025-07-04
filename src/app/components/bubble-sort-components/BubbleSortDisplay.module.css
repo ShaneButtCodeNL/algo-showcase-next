@@ -1,0 +1,11 @@
+.smallScreen {
+  display: none;
+}
+@media screen and (max-width: 780px) {
+  .smallScreen {
+    display: block;
+  }
+  .bigScreen {
+    display: none;
+  }
+}
