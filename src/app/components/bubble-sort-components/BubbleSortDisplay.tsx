@@ -117,7 +117,21 @@ export default function BubbleSortDisplay(props: any) {
         </div>
         <div className={styles.smallScreen}>
           <HamburgerMenu title="List Controls">
-            <></>
+            <BubbleSortControlBox
+            updateList={updateList}
+            reset={reset}
+            setStep={setStep}
+            makeAnimation={makeAnimation}
+            pause={pause}
+            nextFrame={nextFrame}
+            prevFrame={prevFrame}
+            lastFrame={() => setStep(animationFrames.length - 1)}
+            setOrders={setOrders}
+            displayNumbers={displayNumbers}
+            setDisplayNumbers={setDisplayNumbers}
+            shuffleList={suffleList}
+            isAnimated={animation !== null}
+          />
           </HamburgerMenu>
           <HamburgerMenu title="Information">
             <></>

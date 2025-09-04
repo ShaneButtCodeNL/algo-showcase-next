@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import styles from "./BubbleSortControlBox.module.css"
 
 export default function BubbleSortControlBox(props: {
   updateList: Function;
@@ -25,16 +26,16 @@ export default function BubbleSortControlBox(props: {
     return v;
   };
   return (
-    <div className="bubblesort-control-box control-box">
+    <div className={styles.bubblesortControlBox}>
       <label
         data-area="label-list-controls"
-        style={{ gridArea: "label-list-controls", textAlign: "center" }}
+        style={{ gridArea: "label-list-controls", textAlign: "center" ,textDecoration:"underline"}}
       >
         List Controls
       </label>
       <label
         data-area="label-size"
-        className="bubblesort-label"
+        className={styles.label}
         style={{ gridArea: "label-size" }}
       >
         List Size : {`${formatValue(3, listSize)}`}
@@ -66,7 +67,7 @@ export default function BubbleSortControlBox(props: {
       </datalist>
       <label
         data-area="label-randomize"
-        className="bubblesort-label"
+        className={styles.label}
         style={{ gridArea: "label-randomize" }}
       >
         Randomize List
@@ -87,7 +88,7 @@ export default function BubbleSortControlBox(props: {
       </button>
       <label
         data-area="label-shuffle"
-        className="bubblesort-label"
+        className={styles.label}
         style={{ gridArea: "label-shuffle" }}
       >
         Shuffle List
@@ -102,7 +103,7 @@ export default function BubbleSortControlBox(props: {
       >
         Shuffle
       </button>
-      <label className="bubblesort-label" style={{ gridArea: "label-display" }}>
+      <label className={styles.label} style={{ gridArea: "label-display" }}>
         Display{" "}
       </label>
       <button
